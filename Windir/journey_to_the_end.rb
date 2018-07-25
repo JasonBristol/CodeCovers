@@ -22,9 +22,9 @@ define :strum do |c, d=0.1|
   end
 end
 
-define :whole_note do |note, a=1|
-  play note, amp: a
-  sleep WHOLE_NOTE
+define :whole_note do |note, a=1, d=1|
+  play note, amp: a, release: d
+  sleep WHOLE_NOTE * d
 end
 
 define :quarter_note do |note, a=1|
@@ -41,6 +41,8 @@ end
 live_loop :lead, sync: :metro do
 
   with_fx :distortion, distort: 0.1 do
+
+    tick
 
     8.times do
       quarter_note :C2
@@ -64,7 +66,112 @@ live_loop :lead, sync: :metro do
       quarter_note :Ds2
     end
 
-    # Break
+    # Break 1
+    2.times do
+      quarter_note :Ds2
+      quarter_note :Ds2
+      quarter_note :Ds2
+      quarter_note :Ds2
+    end
+
+    2.times do
+      quarter_note :C2
+      quarter_note :C2
+      quarter_note :C2
+      quarter_note :C2
+    end
+
+    with_fx :reverb do
+      amp = 1.5
+
+      whole_note :C3, amp
+      whole_note :G3, amp
+      whole_note :C3, amp
+      whole_note :Ds3, amp
+
+      whole_note :As3, amp
+      whole_note :F2, amp
+      whole_note :As3, amp
+      whole_note :Ds3, amp
+
+      whole_note :As3, amp
+      whole_note :F2, amp
+      whole_note :As3, amp
+      whole_note :D3, amp
+
+      whole_note :C3, amp
+      whole_note :G3, amp
+      whole_note :C3, amp
+      whole_note :Ds3, amp
+    end
+
+    # 41
+    with_fx :reverb do
+      quarter_note :C3
+      quarter_note :G3
+      quarter_note :C3
+      quarter_note :Ds3
+
+      quarter_note :G4
+      quarter_note :Ds3
+      quarter_note :C3
+      quarter_note :Ds3
+
+      quarter_note :D3
+      quarter_note :As3
+      quarter_note :F3
+      quarter_note :As3
+
+      quarter_note :C3
+      quarter_note :G3
+      quarter_note :C3
+      quarter_note :Ds3
+    end
+
+    # A vague
+    4.times do
+      quarter_note :C2
+      quarter_note :G2
+      quarter_note :C2
+      quarter_note :Ds2
+
+      quarter_note :G3
+      quarter_note :Ds2
+      quarter_note :C2
+      quarter_note :Ds2
+
+      quarter_note :D2
+      quarter_note :As2
+      quarter_note :F2
+      quarter_note :As2
+
+      quarter_note :C2
+      quarter_note :G2
+      quarter_note :C2
+      quarter_note :Ds2
+
+      quarter_note :G3
+      quarter_note :Ds2
+      quarter_note :C2
+      quarter_note :G2
+
+      quarter_note :As2
+      quarter_note :Ds2
+      quarter_note :As2
+      quarter_note :Ds2
+
+      quarter_note :D2
+      quarter_note :As2
+      quarter_note :F2
+      quarter_note :As2
+
+      quarter_note :C2
+      quarter_note :G2
+      quarter_note :C2
+      quarter_note :Ds2
+    end
+
+    # Break 2
     2.times do
       quarter_note :Ds2
       quarter_note :Ds2
@@ -105,74 +212,139 @@ live_loop :lead, sync: :metro do
       end
     end
 
-    # 41
-
     # I embrace
-    ##| quarter_note :C3
-    ##| quarter_note :G3
-    ##| quarter_note :C3
-    ##| quarter_note :Ds3
-
-    ##| quarter_note :As3
-    ##| quarter_note :F3
-    ##| quarter_note :As3
-    ##| quarter_note :Ds3
-
-    ##| quarter_note :As3
-    ##| quarter_note :F3
-    ##| quarter_note :As3
-    ##| quarter_note :D3
-
-    ##| quarter_note :C3
-    ##| quarter_note :G3
-    ##| quarter_note :C3
-    ##| quarter_note :Ds3
-  end
-end
-
-live_loop :distort_lead, sync: :metro do
-  with_fx :distortion, distort: 0.2, mix: 0.5 do
-
-    8.times do
-      quarter_note :C2
-      quarter_note :G2
-      quarter_note :C2
-      quarter_note :Ds2
-
+    5.times do
+      quarter_note :C3
       quarter_note :G3
-      quarter_note :Ds2
-      quarter_note :C2
-      quarter_note :Ds2
+      quarter_note :C3
+      quarter_note :Ds3
 
-      quarter_note :D2
-      quarter_note :As2
-      quarter_note :F2
-      quarter_note :As2
+      quarter_note :As3
+      quarter_note :F3
+      quarter_note :As3
+      quarter_note :Ds3
 
-      quarter_note :C2
-      quarter_note :G2
-      quarter_note :C2
-      quarter_note :Ds2
+      quarter_note :As3
+      quarter_note :F3
+      quarter_note :As3
+      quarter_note :D3
+
+      quarter_note :C3
+      quarter_note :G3
+      quarter_note :C3
+      quarter_note :Ds3
+
+      quarter_note :C3
+      quarter_note :G3
+      quarter_note :C3
+      quarter_note :Ds3
+
+      quarter_note :D3
+      quarter_note :As3
+      quarter_note :D3
+      quarter_note :F4
+
+      quarter_note :Ds3
+      quarter_note :As3
+      quarter_note :Ds3
+      quarter_note :G4
+
+      quarter_note :D3
+      quarter_note :As3
+      quarter_note :D3
+      quarter_note :F4
     end
 
-    # Break
-    2.times do
-      quarter_note :Ds2
-      quarter_note :Ds2
-      quarter_note :Ds2
-      quarter_note :Ds2
-    end
+    # Break 3
+    4.times do
+      with_fx :reverb do
+        amp = 2.0
+        duration = 2.0
 
-    2.times do
-      quarter_note :C2
-      quarter_note :C2
-      quarter_note :C2
-      quarter_note :C2
-    end
+        whole_note :C4, amp
+        whole_note :G3, amp
+        whole_note :C4, amp
+        whole_note :Ds4, amp
 
-    with_fx :reverb do
-      play chord(:G, "7"), release: 12
-      sleep WHOLE_NOTE * 16
+        whole_note :As3, amp
+        whole_note :F3, amp
+        whole_note :As3, amp
+        whole_note :Ds4, amp
+
+        whole_note :D4, amp
+        whole_note :As3, amp
+        whole_note :F3, amp
+        whole_note :D4, amp
+
+        whole_note :Ds4, amp
+        whole_note :C4, amp
+        whole_note :G3, amp, duration
+
+        whole_note :C4, amp
+        whole_note :G3, amp
+        whole_note :C4, amp
+        whole_note :Ds4, amp
+
+        whole_note :D4, amp
+        whole_note :As4, amp
+        whole_note :F4, amp, duration
+
+        whole_note :Ds4, amp, duration
+        whole_note :As4, amp, duration
+
+        whole_note :D4, amp
+        whole_note :As4, amp
+        whole_note :F4, amp, duration
+      end
     end
   end
 end
+
+# live_loop :distort_lead, sync: :metro do
+#   with_fx :distortion, distort: 0.2, mix: 0.5 do
+
+#     tick
+
+#     8.times do
+#       quarter_note :C2
+#       quarter_note :G2
+#       quarter_note :C2
+#       quarter_note :Ds2
+
+#       quarter_note :G3
+#       quarter_note :Ds2
+#       quarter_note :C2
+#       quarter_note :Ds2
+
+#       quarter_note :D2
+#       quarter_note :As2
+#       quarter_note :F2
+#       quarter_note :As2
+
+#       quarter_note :C2
+#       quarter_note :G2
+#       quarter_note :C2
+#       quarter_note :Ds2
+#     end
+
+#     # Break
+#     2.times do
+#       quarter_note :Ds2
+#       quarter_note :Ds2
+#       quarter_note :Ds2
+#       quarter_note :Ds2
+#     end
+
+#     2.times do
+#       quarter_note :C2
+#       quarter_note :C2
+#       quarter_note :C2
+#       quarter_note :C2
+#     end
+
+#     with_fx :reverb do
+#       play chord(:G, "7"), release: 12
+#       sleep WHOLE_NOTE * 16
+#     end
+#   end
+# end
